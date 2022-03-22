@@ -1,10 +1,17 @@
 class = require "lib.30log"
 tiny = require "lib.tiny"
 
-local unitControlSystem = require("src.systems.UnitControlSystem")()
+-- Entities
 local unit = require("src.entities.Unit")()
+local button = require("src.entities.Button")(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, 100, 100)
 
-local world = tiny.world(unitControlSystem, unit)
+-- Systems
+local controlSystem = require("src.systems.ControlSystem")()
+local renderSystem = require("src.systems.RenderSystem")()
+local clickSystem = require("src.systems.ClickSystem")()
+
+-- World
+local world = tiny.world(controlSystem, renderSystem, clickSystem, unit, button)
 
 function love.load()
 end

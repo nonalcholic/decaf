@@ -1,9 +1,7 @@
-local Unit = require "src.entities.Unit"
+local ControlSystem = tiny.processingSystem(class "ControlSystem")
+ControlSystem.filter = tiny.requireAll("controlable")
 
-local UnitControlSystem = tiny.processingSystem(class "UnitControlSystem")
-UnitControlSystem.filter = tiny.requireAll("controlable", "renderable")
-
-function UnitControlSystem:process(e, dt)
+function ControlSystem:process(e, dt)
     local vel = e.vel
     local l, r, u, d = love.keyboard.isDown('a'), love.keyboard.isDown('d'), love.keyboard.isDown('w'),
         love.keyboard.isDown('s')
@@ -25,7 +23,6 @@ function UnitControlSystem:process(e, dt)
     end
 
     e:update(dt)
-    e:draw(dt)
 end
 
-return UnitControlSystem
+return ControlSystem
