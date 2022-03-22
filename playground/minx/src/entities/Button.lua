@@ -22,7 +22,7 @@ function Button:update(dt)
     else
         self.clicked = false
     end
-    print("clicked", self.clicked)
+    print("Button:update(dt)", "clicked", self.clicked)
 end
 
 function Button:draw(dt)
