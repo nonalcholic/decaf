@@ -27,30 +27,19 @@ end
 local unit = require("src.entities.Unit")()
 local button = require("src.entities.Button")(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, 100, 100)
 local text = require("src.entities.Text")("Hello world!", love.graphics.getWidth() / 3, 100, 100, "center")
+local ubutton = require("src.entities.UButton")
+u:add(ubutton)
 
 -- Systems
 local controlSystem = require("src.systems.ControlSystem")()
 local renderSystem = require("src.systems.RenderSystem")()
 local clickSystem = require("src.systems.ClickSystem")()
+local actionSystem = require("src.systems.ActionSystem")()
 
 -- World
-local world = tiny.world(controlSystem, renderSystem, clickSystem, unit, button, text)
+local world = tiny.world(controlSystem, renderSystem, clickSystem, actionSystem, unit, button, text, ubutton)
 
 function love.load()
-    local clickMe = urutora.button({
-        text = 'Click me!',
-        x = 10,
-        y = 10,
-        w = 200
-    })
-
-    local num = 0
-    clickMe:action(function(e)
-        num = num + 1
-        e.target.text = 'You clicked me ' .. num .. ' times!'
-    end)
-
-    u:add(clickMe)
 end
 
 function love.draw()

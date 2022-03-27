@@ -25,7 +25,7 @@ function Text:update(dt)
     else
         self.clicked = false
     end
-    print("Text:update(dt)", "clicked", self.clicked)
+    -- print("Text:update(dt)", "clicked", self.clicked)
 end
 
 function Text:draw(dt)
