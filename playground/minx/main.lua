@@ -3,6 +3,7 @@ tiny = require "lib.tiny"
 urutora = require "lib.urutora"
 local u = urutora:new()
 
+-- Urutora: Pass love's events to urutora
 function love.mousepressed(x, y, button)
     u:pressed(x, y)
 end
@@ -54,12 +55,19 @@ end
 
 function love.draw()
     local dt = love.timer.getDelta()
+
+    -- ECS: Update
     world:update(dt)
+
+    -- Urutora
     u:draw(dt)
 end
 
 function love.update(dt)
+    -- ECS: Update
     world:update(dt)
+
+    -- Urutora
     u:update(dt)
 end
 
