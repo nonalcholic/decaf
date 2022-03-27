@@ -1,18 +1,20 @@
 class = require "lib.30log"
 tiny = require "lib.tiny"
+urutora = require('lib.urutora')
 
-local urutora = require('lib.urutora')
 local u
 
 -- Entities
-local ubutton = require("src.entities.UButton")
+local ubutton1 = require("src.entities.UButton"):create()
+local ubutton2 = require("src.entities.UButton"):create()
+local ubutton3 = require("src.entities.UButton"):create()
 -- u:add(ubutton)
 
 -- Systems
 local actionSystem = require("src.systems.ActionSystem")()
 
 -- World
-local world = tiny.world(actionSystem, ubutton)
+local world = tiny.world(actionSystem, ubutton1)
 
 local style = {
     fgColor = urutora.utils.toRGB('#788089'),
@@ -26,9 +28,10 @@ local style = {
 
 local bgColor = {0.98, 0.98, 0.98}
 local canvas
-local panelA
+local panel
 
-function love.load()
+
+local function init_urutora()
     local w, h = love.window.getMode()
     w = w / 2
     h = h / 2
@@ -67,7 +70,7 @@ function love.load()
     u.setDefaultFont(font1)
     u.setResolution(canvas:getWidth(), canvas:getHeight())
 
-    panelA = u.panel({
+    panel = u.panel({
         rows = 2,
         cols = 2,
         x = 10,
@@ -77,29 +80,17 @@ function love.load()
         tag = 'PanelA'
     })
     -- panelA.outline = true
-    panelA:addAt(1, 1, u.label({
+    panel:addAt(1, 1, u.label({
         text = 'A panel'
-    })):addAt(1, 2, u.toggle({
-        text = "(1, 2)"
-    }):action(function(e)
-        print("(1, 2)" .. tostring(e.target.value))
-    end)):addAt(2, 1, u.toggle({
-        text = "(2, 1)"
-    }):action(function(e)
-        print("(2, 1)" .. tostring(e.target.value))
-    end)):addAt(2, 2, u.toggle({
-        text = "(2, 2)"
-    }):action(function(e)
-        print("(2, 2)" .. tostring(e.target.value))
-    end))
-    u:add(panelA)
-    panelA:setStyle(style)
+    })):addAt(1, 2, ubutton1):addAt(2, 1, ubutton2):addAt(2, 2, ubutton3)
+    u:add(panel)
+    panel:setStyle(style)
     -- activation and deactivation elements by tag
-    -- u:deactivateByTag('PanelD')
 end
 
-local x = 0
-local y = 0
+function love.load()
+    init_urutora()
+end
 
 function love.update(dt)
     -- ECS: Update
@@ -107,10 +98,6 @@ function love.update(dt)
 
     -- Urutora
     u:update(dt)
-
-    -- panelA:moveTo(x, y)
-    -- x = x + 0.1
-    -- y = y + 0.1
 end
 
 function love.draw()
