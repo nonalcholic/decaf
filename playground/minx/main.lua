@@ -33,8 +33,8 @@ local panel
 
 local function init_urutora()
     local w, h = love.window.getMode()
-    w = w / 2
-    h = h / 2
+    -- w = w / 2
+    -- h = h / 2
 
     u = urutora:new()
 
@@ -64,10 +64,9 @@ local function init_urutora()
 
     canvas = love.graphics.newCanvas(w, h)
     canvas:setFilter('nearest', 'nearest')
-    local font1 = love.graphics.newFont('fonts/proggy/proggy-tiny.ttf', 16)
-    local font2 = love.graphics.newFont('fonts/proggy/proggy-square-rr.ttf', 16)
+    local font = love.graphics.newFont('fonts/neodgm.ttf', 16)
 
-    u.setDefaultFont(font1)
+    u.setDefaultFont(font)
     u.setResolution(canvas:getWidth(), canvas:getHeight())
 
     panel = u.panel({
@@ -75,8 +74,8 @@ local function init_urutora()
         cols = 2,
         x = 10,
         y = 20,
-        w = w / 2,
-        h = h / 2,
+        w = w / 4,
+        h = h / 4,
         tag = 'PanelA'
     })
     -- panelA.outline = true
