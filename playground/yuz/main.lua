@@ -1,19 +1,23 @@
+tiny = require("lib.tiny")
+drawSystem = require("drawSystem")
 
-tiny = require "lib.tiny"
--- bg = require ("bg");
+Person = require('Person');
+
+
+world = tiny.world(drawSystem, Person.new(10,10,'yuz'),Person.new(40,40,'minji'))
 
 function love.load()
-
 end
 
-function love.keypressed(key)
+-- function love.keypressed(key)
 
-end
+-- end
 
 
 function love.update(dt)
-
+    world:update(dt)
 end
 
 function love.draw(dt)
+    world:update(dt)
 end
