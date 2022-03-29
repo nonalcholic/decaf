@@ -1,4 +1,4 @@
-Person = { class = "Person" }
+local Person = { class = "Person" }
 Person.__index = Person
 
 -- Person.sprite = assets.img_bullet
