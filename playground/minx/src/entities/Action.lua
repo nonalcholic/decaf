@@ -2,7 +2,7 @@ require "src.utils.utils"
 urutora = require "lib.urutora"
 
 local Action = urutora.toggle({
-    value = false
+    value = true
 })
 
 -- onClick
@@ -16,6 +16,8 @@ end)
 
 -- ECS
 Action.isAction = true
+Action.isCommand = true
+Action.pushed = false
 
 function Action:create(o)
     return G_FuncNew(Action):new(o)

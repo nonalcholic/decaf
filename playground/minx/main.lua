@@ -1,21 +1,27 @@
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+    require("lldebugger").start()
+end
+
 class = require "lib.30log"
 tiny = require "lib.tiny"
 urutora = require('lib.urutora')
 
 local u
 
+G_commandQ = require("src.entities.CommandQ")()
+
 -- Entities
 local action1 = require("src.entities.Action"):create({
     text = "A (-2)",
-    energyCost = -2
+    energyCost = 2
 })
 local action2 = require("src.entities.Action"):create({
     text = "B (-1)",
-    energyCost = -1
+    energyCost = 1
 })
 local action3 = require("src.entities.Action"):create({
     text = "C (-3)",
-    energyCost = -3
+    energyCost = 3
 })
 
 local energy = require("src.entities.Energy"):create()
@@ -106,6 +112,11 @@ function love.update(dt)
 
     -- Urutora
     u:update(dt)
+
+    -- debug
+    for idx = 1, #G_commandQ.queue do
+        print("G_commandQ", idx, G_commandQ.queue[idx].energyCost)
+    end
 end
 
 function love.draw()
