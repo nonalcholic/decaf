@@ -5,16 +5,26 @@ urutora = require('lib.urutora')
 local u
 
 -- Entities
-local ubutton1 = require("src.entities.UButton"):create()
-local ubutton2 = require("src.entities.UButton"):create()
-local ubutton3 = require("src.entities.UButton"):create()
--- u:add(ubutton)
+local action1 = require("src.entities.Action"):create({
+    text = "A (-2)",
+    energyCost = -2
+})
+local action2 = require("src.entities.Action"):create({
+    text = "B (-1)",
+    energyCost = -1
+})
+local action3 = require("src.entities.Action"):create({
+    text = "C (-3)",
+    energyCost = -3
+})
+
+local energy = require("src.entities.Energy"):create()
 
 -- Systems
 local actionSystem = require("src.systems.ActionSystem")()
 
 -- World
-local world = tiny.world(actionSystem, ubutton1)
+local world = tiny.world(actionSystem, action1, action2, action3, energy)
 
 local style = {
     fgColor = urutora.utils.toRGB('#788089'),
@@ -29,7 +39,6 @@ local style = {
 local bgColor = {0.98, 0.98, 0.98}
 local canvas
 local panel
-
 
 local function init_urutora()
     local w, h = love.window.getMode()
@@ -80,8 +89,8 @@ local function init_urutora()
     })
     -- panelA.outline = true
     panel:addAt(1, 1, u.label({
-        text = 'A panel'
-    })):addAt(1, 2, ubutton1):addAt(2, 1, ubutton2):addAt(2, 2, ubutton3)
+        text = 'Choose...'
+    })):addAt(1, 2, action1):addAt(2, 1, action2):addAt(2, 2, action3)
     u:add(panel)
     panel:setStyle(style)
     -- activation and deactivation elements by tag
