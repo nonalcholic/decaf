@@ -21,6 +21,11 @@ function Person:remove()
     world:remove(self)
 end
 
+function Person:draw()
+    love.graphics.circle("fill", self.pos.x, self.pos.y, 10 )
+    love.graphics.print(self.name, self.pos.x + 10, self.pos.y)
+end
+
 
 
 
