@@ -1,11 +1,15 @@
 tiny = require("lib.tiny")
 
-drawSystem = require("systems.drawSystem")
-Person = require('objects.person');
-Student = require('objects.student');
+DrawSystem = require("systems.DrawSystem")
+TurnSystem = require("systems.TurnSystem")
+
+Person = require('objects.Person');
+Student = require('objects.Student');
 
 
-world = tiny.world(drawSystem, 
+world = tiny.world(
+    DrawSystem,
+    TurnSystem,
     Person.new(10,10,'yuz'),
     Person.new(40,40,'minji'),
     Student.new(300,10,'xion',3),
@@ -13,16 +17,20 @@ world = tiny.world(drawSystem,
 )
 
 function love.load()
+
 end
 
 function love.keypressed(key)
+
 end
 
 time = 0
 
 function love.update(dt)
-    time = time + dt
-    -- print(time)
+    -- time = time + dt
+    -- if time > 10 then
+    --     world.ge
+    -- end
 end
 
 function love.draw(dt)
